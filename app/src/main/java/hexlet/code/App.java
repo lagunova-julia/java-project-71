@@ -1,6 +1,7 @@
 package hexlet.code;
 
 import picocli.CommandLine;
+import java.nio.file.Path;
 
 
 public class App {
@@ -15,6 +16,12 @@ public class App {
 )
 
 class Differ implements Runnable {
+    @CommandLine.Parameters(index = "0", description = "path to first file", paramLabel = "filepath1")
+    Path filepath1;
+    @CommandLine.Parameters(index = "1", description = "path to second file", paramLabel = "filepath2")
+    Path filepath2;
+    @CommandLine.Option(names={"-f", "--format"}, description = "output format [default: stylish]", paramLabel = "format")
+    String format;
     @Override
     public void run() {
         System.out.println("[gendiff]");
