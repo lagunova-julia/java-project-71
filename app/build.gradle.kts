@@ -1,6 +1,7 @@
 plugins {
     id("java")
     id("application")
+    id("checkstyle")
 }
 
 group = "hexlet.code"
@@ -25,3 +26,4 @@ tasks.test {
 application {
     mainClass.set("hexlet.code.App")
 }
+
