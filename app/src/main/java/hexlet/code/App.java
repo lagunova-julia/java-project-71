@@ -13,14 +13,14 @@ import java.util.concurrent.Callable;
 )
 public class App implements Callable {
     @Parameters(index = "0", description = "path to first file", paramLabel = "filepath1")
-    private String filepath1;// = new File("/src/test/resources/file1.json"); мб не нужно создавать файл
+    private String filepath1; // = new File("/src/test/resources/file1.json"); мб не нужно создавать файл
     @Parameters(index = "1", description = "path to second file", paramLabel = "filepath2")
-    private String filepath2;// = new File("/src/test/resources/file2.json");
+    private String filepath2; // = new File("/src/test/resources/file2.json");
     @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", paramLabel = "format")
     private String format;
 
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new App()).execute(args);//"-h" was instead of args
+        int exitCode = new CommandLine(new App()).execute(args); //"-h" was instead of args
         System.exit(exitCode);
     }
 
