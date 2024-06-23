@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 public class DataUtils {
     private static Path getFixedPath(String fileName) {
         //формируется абсолютный путь к файлу
-        return Paths.get("app", "src", "test", "resources", fileName).toAbsolutePath().normalize();
+        return Paths.get("src", "main", "resources", fileName).toAbsolutePath().normalize();
     }
 
     public static String readFixedPath(String fileName) throws Exception {
