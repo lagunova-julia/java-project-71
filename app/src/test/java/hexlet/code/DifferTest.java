@@ -4,10 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DifferTest {
-
+    private String filePath1;
+    private String filePath2;
     private String expected;
     private String result;
 
@@ -17,8 +17,8 @@ class DifferTest {
 
     @Test
     void generate() throws Exception {
-        assertTrue(true);
-
+        filePath1 = "src/test/resources/filepath1.json";
+        filePath2 = "src/test/resources/filepath2.json";
         expected = "{\n"
                 + "  - follow: false\n"
                 + "    host: hexlet.io\n"
@@ -27,7 +27,7 @@ class DifferTest {
                 + "  + timeout: 20\n"
                 + "  + verbose: true\n"
                 + "}";
-        result = Differ.generate("filepath1.json", "filepath2.json");
+        result = Differ.generate(filePath1, filePath2);
         assertEquals(expected, result);
     }
 }
