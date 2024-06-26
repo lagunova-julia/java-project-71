@@ -3,7 +3,6 @@ package hexlet.code;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class DataUtils {
     private static Path getFixedPath(String fileName) {
