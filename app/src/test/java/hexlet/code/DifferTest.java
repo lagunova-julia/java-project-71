@@ -29,5 +29,10 @@ class DifferTest {
                 + "}";
         result = Differ.generate(filePath1, filePath2);
         assertEquals(expected, result);
+
+        filePath1 = "src/test/resources/filepath1.yml";
+        filePath2 = "src/test/resources/filepath2.yml";
+        result = Differ.generate(filePath1, filePath2);
+        assertEquals(expected, result);
     }
 }

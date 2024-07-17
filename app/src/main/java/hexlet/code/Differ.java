@@ -5,13 +5,26 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Differ {
+
     public static String generate(String file1, String file2) throws Exception {
         String content1 = DataUtils.readFixedPath(file1);
         String content2 = DataUtils.readFixedPath(file2);
 
-        // Parser.getData() превращает строку в Map (key - value)
-        var dataContent1 = new TreeMap<>(Parser.getData(content1));
-        var dataContent2 = new TreeMap<>(Parser.getData(content2));
+        TreeMap<String, Object> dataContent1 = null;
+        TreeMap<String, Object> dataContent2 = null;
+
+
+        //будто бы надо вставить код, проверяющий формат файла и отдающий это в нужный метод
+        if (file1.contains("json")) {
+            // Parser.getData() превращает строку в Map (key - value)
+            dataContent1 = new TreeMap<>(Parser.getData(content1));
+            dataContent2 = new TreeMap<>(Parser.getData(content2));
+        } else if (file1.contains("yml")) {
+            dataContent1 = new TreeMap<>(Parser.getDataYaml(content1));
+            dataContent2 = new TreeMap<>(Parser.getDataYaml(content2));
+        }
+
+
 
         Map<Key, Object> resultMap = new TreeMap<>(Comparator.comparing(Key::getKey)
                 .thenComparing(Key::getDiff, Comparator.reverseOrder()));
