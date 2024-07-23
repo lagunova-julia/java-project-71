@@ -1,6 +1,11 @@
 package hexlet.code;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeSet;
+import java.util.ArrayList;
+
 
 public class Comparison {
     public static List<Map<String, Object>> compare(Map<String, Object> file1, Map<String, Object> file2) {
@@ -14,14 +19,14 @@ public class Comparison {
         List<Map<String, Object>> comparingResult = new ArrayList<>();
 
         // обходим коллекцию ключей и добавляем их в новые мапы и всё в лист
-        for(String key : keys) {
+        for (String key : keys) {
             Map<String, Object> map = new HashMap<>();
             map.put("FIELD", key);
 
             var value1 = file1.get(key);
             var value2 = file2.get(key);
 
-            if(file1.containsKey(key) && file2.containsKey(key)) {
+            if (file1.containsKey(key) && file2.containsKey(key)) {
 
                 if (value1.equals(value2)) {
                     map.put("STATUS", "SAME");
