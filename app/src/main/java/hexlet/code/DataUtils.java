@@ -20,4 +20,9 @@ public class DataUtils {
         return Files.readString(filePath);
 
     }
+
+    public static String getFileType(String filepath) {
+        String[] parts = filepath.split("\\.");
+        return parts[1];
+    }
 }

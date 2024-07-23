@@ -7,16 +7,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 public class Parser {
-    public static Map<String, Object> getData(String content) throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> map = objectMapper.readValue(content, new TypeReference<>() { });
-        return map;
-    }
+    // добавить в метод String format, и внутри метода уже идет выбор, какой формат парсит
+    // в один метод эти 2 объединить
+    public static Map<String, Object> parse(String content, String format) throws Exception {
+        Map<String, Object> map = null;
+        switch (format) {
+            case "json":
+                ObjectMapper objectMapper = new ObjectMapper();
+                map = objectMapper.readValue(content, new TypeReference<>() {
+                });
+                break;
+            case "yml":
+                ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+                map = mapper.readValue(content, new TypeReference<>() {
+                });
+        }
 
-    public static Map<String, Object> getDataYaml(String content) throws Exception {
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        Map<String, Object> map = mapper.readValue(content, new TypeReference<>() { });
         return map;
     }
 }
-//ObjectMapper здесь вместо отдельного метода parse()
