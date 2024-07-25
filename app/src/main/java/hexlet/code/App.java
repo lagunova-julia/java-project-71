@@ -17,7 +17,7 @@ public class App implements Callable {
     // = new File("/src/test/resources/file1.json"); мб не нужно создавать файл
     @Parameters(index = "1", description = "path to second file", paramLabel = "filepath2")
     private String filepath2; // = new File("/src/test/resources/file2.json");
-    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", paramLabel = "format")
+    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", defaultValue = "stylish",paramLabel = "format")
     private String format;
 
     public static void main(String[] args) {
@@ -27,7 +27,7 @@ public class App implements Callable {
 
     @Override
     public Object call() throws Exception {
-        System.out.println(Differ.generate(filepath1, filepath2)); //сюда добавится format
+        System.out.println(Differ.generate(filepath1, filepath2, format)); //сюда добавится format
         return 0;
     }
 }

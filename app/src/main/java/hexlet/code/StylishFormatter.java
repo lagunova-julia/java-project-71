@@ -12,14 +12,14 @@ public class StylishFormatter {
         for (var map : comparingResult) {
             status = map.get("STATUS");
             if (status.equals("SAME")) {
-                result.append("    " + map.get("FIELD") + ": " + map.get("OLD_VALUE") + "\n");
+                result.append("    " + map.get("FIELD") + ": " + map.get("OLD_VALUE").toString() + "\n");
             } else if (status.equals("CHANGED")) {
-                result.append("  - " + map.get("FIELD") + ": " + map.get("OLD_VALUE") + "\n");
-                result.append("  + " + map.get("FIELD") + ": " + map.get("NEW_VALUE") + "\n");
+                result.append("  - " + map.get("FIELD") + ": " + map.get("OLD_VALUE").toString() + "\n");
+                result.append("  + " + map.get("FIELD") + ": " + map.get("NEW_VALUE").toString() + "\n");
             } else if (status.equals("DELETED")) {
-                result.append("  - " + map.get("FIELD") + ": " + map.get("OLD_VALUE") + "\n");
+                result.append("  - " + map.get("FIELD") + ": " + map.get("OLD_VALUE").toString() + "\n");
             } else {
-                result.append("  + " + map.get("FIELD") + ": " + map.get("NEW_VALUE") + "\n");
+                result.append("  + " + map.get("FIELD") + ": " + map.get("NEW_VALUE").toString() + "\n");
             }
         }
         result.append("}");

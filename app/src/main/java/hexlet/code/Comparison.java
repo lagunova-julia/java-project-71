@@ -23,8 +23,8 @@ public class Comparison {
             Map<String, Object> map = new HashMap<>();
             map.put("FIELD", key);
 
-            var value1 = file1.get(key);
-            var value2 = file2.get(key);
+            Object value1 = (file1.get(key) == null) ? String.valueOf(file1.get(key)) : file1.get(key);
+            Object value2 = (file2.get(key) == null) ? String.valueOf(file2.get(key)) : file2.get(key);
 
             if (file1.containsKey(key) && file2.containsKey(key)) {
 
