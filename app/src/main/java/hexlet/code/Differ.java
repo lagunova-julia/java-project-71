@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Differ {
 
-    public static String generate(String filepath1, String filepath2, String format) throws Exception { // format добавится
+    public static String generate(String filepath1, String filepath2, String format) throws Exception {
         // чтение файлов
         String content1 = DataUtils.readFixedPath(filepath1);
         String content2 = DataUtils.readFixedPath(filepath2);
@@ -27,11 +27,12 @@ public class Differ {
     }
 
     public static String format(List<Map<String, Object>> comparingResult, String format) {
-        if ("stylish".equals(format))
+        if ("stylish".equals(format)) {
             return StylishFormatter.format(comparingResult);
-        // default
-        else
+            // default
+        } else {
             return StylishFormatter.format(comparingResult);
+        }
 
 //        return switch (format) {
 //            case "stylish":
