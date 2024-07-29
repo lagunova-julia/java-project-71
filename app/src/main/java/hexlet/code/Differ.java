@@ -30,6 +30,8 @@ public class Differ {
         if ("stylish".equals(format)) {
             return StylishFormatter.format(comparingResult);
             // default
+        } else if ("plain".equals(format)) {
+            return PlainFormatter.format(comparingResult);
         } else {
             return StylishFormatter.format(comparingResult);
         }

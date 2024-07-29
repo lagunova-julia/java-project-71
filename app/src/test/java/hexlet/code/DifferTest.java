@@ -8,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class DifferTest {
     private String filePath1;
     private String filePath2;
-    private String expected;
+    private String expectedStylish;
+    private String expectedPlain;
     private String result;
     private String format;
 
@@ -20,7 +21,7 @@ class DifferTest {
     void generate() throws Exception {
         filePath1 = "src/test/resources/file1.json";
         filePath2 = "src/test/resources/file2.json";
-        expected = "{\n"
+        expectedStylish = "{\n"
                 + "    chars1: [a, b, c]\n"
                 + "  - chars2: [d, e, f]\n"
                 + "  + chars2: false\n"
@@ -46,11 +47,32 @@ class DifferTest {
                 + "  + setting3: none\n"
                 + "}";
         result = Differ.generate(filePath1, filePath2, format);
-        assertEquals(expected, result);
+        assertEquals(expectedStylish, result);
+
+        format = "plain";
+        expectedPlain = "Property 'chars2' was updated. From [complex value] to false\n"
+                + "Property 'checked' was updated. From false to true\n"
+                + "Property 'default' was updated. From null to [complex value]\n"
+                + "Property 'id' was updated. From 45 to null\n"
+                + "Property 'key1' was removed\n"
+                + "Property 'key2' was added with value: 'value2'\n"
+                + "Property 'numbers2' was updated. From [complex value] to [complex value]\n"
+                + "Property 'numbers3' was removed\n"
+                + "Property 'numbers4' was added with value: [complex value]\n"
+                + "Property 'obj1' was added with value: [complex value]\n"
+                + "Property 'setting1' was updated. From 'Some value' to 'Another value'\n"
+                + "Property 'setting2' was updated. From 200 to 300\n"
+                + "Property 'setting3' was updated. From true to 'none'";
+        result = Differ.generate(filePath1, filePath2, format);
+        assertEquals(expectedPlain, result);
 
         filePath1 = "src/test/resources/file1.yml";
         filePath2 = "src/test/resources/file2.yml";
         result = Differ.generate(filePath1, filePath2, format);
-        assertEquals(expected, result);
+        assertEquals(expectedPlain, result);
+
+        format = "stylish";
+        result = Differ.generate(filePath1, filePath2, format);
+        assertEquals(expectedStylish, result);
     }
 }

@@ -14,9 +14,9 @@ import java.util.concurrent.Callable;
 public class App implements Callable {
     @Parameters(index = "0", description = "path to first file", paramLabel = "filepath1")
     private String filepath1;
-    // = new File("/src/test/resources/file1.json"); мб не нужно создавать файл
+
     @Parameters(index = "1", description = "path to second file", paramLabel = "filepath2")
-    private String filepath2; // = new File("/src/test/resources/file2.json");
+    private String filepath2;
     @Option(
             names = {"-f", "--format"},
             description = "output format [default: stylish]",
@@ -32,7 +32,7 @@ public class App implements Callable {
 
     @Override
     public Object call() throws Exception {
-        System.out.println(Differ.generate(filepath1, filepath2, format)); //сюда добавится format
+        System.out.println(Differ.generate(filepath1, filepath2, format));
         return 0;
     }
 }
