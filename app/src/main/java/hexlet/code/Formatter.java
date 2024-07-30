@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Formatter {
-    public static String format(List<Map<String, Object>> comparingResult, String format) throws JsonProcessingException {
+    public static String format(List<Map<String, Object>> comparingResult, String format)
+            throws JsonProcessingException {
         if ("stylish".equals(format)) {
             return StylishFormatter.format(comparingResult);
             // default
