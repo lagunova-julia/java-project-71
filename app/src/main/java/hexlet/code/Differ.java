@@ -25,16 +25,5 @@ public class Differ {
         return Formatter.format(comparingResult, format);
 
     }
-
-//    public static String format(List<Map<String, Object>> comparingResult, String format) {
-//        if ("stylish".equals(format)) {
-//            return StylishFormatter.format(comparingResult);
-//            // default
-//        } else if ("plain".equals(format)) {
-//            return PlainFormatter.format(comparingResult);
-//        } else {
-//            return StylishFormatter.format(comparingResult);
-//        }
-
 }
 

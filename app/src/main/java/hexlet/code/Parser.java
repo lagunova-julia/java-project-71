@@ -8,7 +8,6 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 public class Parser {
     // добавить в метод String format, и внутри метода уже идет выбор, какой формат парсит
-    // в один метод эти 2 объединить
     public static Map<String, Object> parse(String content, String format) throws Exception {
         Map<String, Object> map = null;
         switch (format) {

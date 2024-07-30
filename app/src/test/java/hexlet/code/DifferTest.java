@@ -10,6 +10,7 @@ class DifferTest {
     private String filePath2;
     private String expectedStylish;
     private String expectedPlain;
+    private String expectedJson;
     private String result;
     private String format;
 
@@ -74,5 +75,15 @@ class DifferTest {
         format = "stylish";
         result = Differ.generate(filePath1, filePath2, format);
         assertEquals(expectedStylish, result);
+
+        format = "json";
+        expectedJson = "[{\"STATUS\":\"SAME\",\"FIELD\":\"chars1\",\"OLD_VALUE\":[\"a\",\"b\",\"c\"]},{\"STATUS\":\"CHANGED\",\"NEW_VALUE\":false,\"FIELD\":\"chars2\",\"OLD_VALUE\":[\"d\",\"e\",\"f\"]},{\"STATUS\":\"CHANGED\",\"NEW_VALUE\":true" +
+                ",\"FIELD\":\"checked\",\"OLD_VALUE\":false},{\"STATUS\":\"CHANGED\",\"NEW_VALUE\":[\"value1\",\"value2\"],\"FIELD\":\"default\",\"OLD_VALUE\":\"null\"},{\"STATUS\":\"CHANGED\",\"NEW_VALUE\":\"null\",\"FIELD\":\"id\"," +
+                "\"OLD_VALUE\":45},{\"STATUS\":\"DELETED\",\"FIELD\":\"key1\",\"OLD_VALUE\":\"value1\"},{\"STATUS\":\"ADDED\",\"NEW_VALUE\":\"value2\",\"FIELD\":\"key2\"},{\"STATUS\":\"SAME\",\"FIELD\":\"numbers1\",\"OLD_VALUE\":[1,2" +
+                ",3,4]},{\"STATUS\":\"CHANGED\",\"NEW_VALUE\":[22,33,44,55],\"FIELD\":\"numbers2\",\"OLD_VALUE\":[2,3,4,5]},{\"STATUS\":\"DELETED\",\"FIELD\":\"numbers3\",\"OLD_VALUE\":[3,4,5]},{\"STATUS\":\"ADDED\",\"NEW_VA" +
+                "LUE\":[4,5,6],\"FIELD\":\"numbers4\"},{\"STATUS\":\"ADDED\",\"NEW_VALUE\":{\"nestedKey\":\"value\",\"isNested\":true},\"FIELD\":\"obj1\"},{\"STATUS\":\"CHANGED\",\"NEW_VALUE\":\"Another value\",\"FIELD\":\"settin" +
+                "g1\",\"OLD_VALUE\":\"Some value\"},{\"STATUS\":\"CHANGED\",\"NEW_VALUE\":300,\"FIELD\":\"setting2\",\"OLD_VALUE\":200},{\"STATUS\":\"CHANGED\",\"NEW_VALUE\":\"none\",\"FIELD\":\"setting3\",\"OLD_VALUE\":true}]";
+        result = Differ.generate(filePath1, filePath2, format);
+        assertEquals(expectedJson, result);
     }
 }
