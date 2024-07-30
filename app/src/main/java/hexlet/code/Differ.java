@@ -22,25 +22,19 @@ public class Differ {
         List<Map<String, Object>> comparingResult = Comparison.compare(file1, file2);
 
         // выдача результата в нужном формате
-        return format(comparingResult, format);
+        return Formatter.format(comparingResult, format);
 
     }
 
-    public static String format(List<Map<String, Object>> comparingResult, String format) {
-        if ("stylish".equals(format)) {
-            return StylishFormatter.format(comparingResult);
-            // default
-        } else if ("plain".equals(format)) {
-            return PlainFormatter.format(comparingResult);
-        } else {
-            return StylishFormatter.format(comparingResult);
-        }
+//    public static String format(List<Map<String, Object>> comparingResult, String format) {
+//        if ("stylish".equals(format)) {
+//            return StylishFormatter.format(comparingResult);
+//            // default
+//        } else if ("plain".equals(format)) {
+//            return PlainFormatter.format(comparingResult);
+//        } else {
+//            return StylishFormatter.format(comparingResult);
+//        }
 
-//        return switch (format) {
-//            case "stylish":
-//                StylishFormatter.format(comparingResult);
-//            default:
-//                StylishFormatter.format(comparingResult);
-//        };
-    }
 }
+

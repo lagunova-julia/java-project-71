@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.formatters;
 
 import java.util.List;
 import java.util.Map;
@@ -26,14 +26,14 @@ public class PlainFormatter {
                     Object newValue = map.get("NEW_VALUE");
 
                     // проверка на вложенные структуры и строки
-                    if (oldValue != null && (oldValue.getClass().isArray() || oldValue instanceof Map<?,?>
+                    if (oldValue != null && (oldValue.getClass().isArray() || oldValue instanceof Map<?, ?>
                             || oldValue instanceof List<?>)) {
                         oldValue = "[complex value]";
                     } else if (oldValue instanceof String && !oldValue.equals("null")) {
                         oldValue = "'" + oldValue + "'";
                     }
 
-                    if (newValue != null && (newValue.getClass().isArray() || newValue instanceof Map<?,?>
+                    if (newValue != null && (newValue.getClass().isArray() || newValue instanceof Map<?, ?>
                             || newValue instanceof List<?>)) {
                         newValue = "[complex value]";
                     } else if (newValue instanceof String && !newValue.equals("null")) {
