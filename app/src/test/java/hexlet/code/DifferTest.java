@@ -47,6 +47,10 @@ class DifferTest {
                 + "  - setting3: true\n"
                 + "  + setting3: none\n"
                 + "}";
+        result = Differ.generate(filePath1, filePath2);
+        assertEquals(expectedStylish, result);
+
+        format = "stylish";
         result = Differ.generate(filePath1, filePath2, format);
         assertEquals(expectedStylish, result);
 
