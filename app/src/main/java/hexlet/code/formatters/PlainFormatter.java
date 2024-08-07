@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class PlainFormatter {
     public static String format(List<Map<String, Object>> comparingResult) {
-        // Если новое значение свойства является составным (объект или массив), то пишется [complex value]:
 
         StringBuilder result = new StringBuilder();
         Object status = "";

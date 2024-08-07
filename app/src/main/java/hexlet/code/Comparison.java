@@ -9,16 +9,12 @@ import java.util.ArrayList;
 
 public class Comparison {
     public static List<Map<String, Object>> compare(Map<String, Object> file1, Map<String, Object> file2) {
-
-        // создаем всевозможные включи по ключам файлов
         var keys = new TreeSet<String>();
         keys.addAll(file1.keySet());
         keys.addAll(file2.keySet());
 
-        // дальше for-each по ключам и формируется List<Map<>>
         List<Map<String, Object>> comparingResult = new ArrayList<>();
 
-        // обходим коллекцию ключей и добавляем их в новые мапы и всё в лист
         for (String key : keys) {
             Map<String, Object> map = new HashMap<>();
             map.put("FIELD", key);

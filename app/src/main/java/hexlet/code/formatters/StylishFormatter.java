@@ -5,8 +5,6 @@ import java.util.Map;
 
 public class StylishFormatter {
     public static String format(List<Map<String, Object>> comparingResult) {
-        // какой формат выдачи результата сравнения
-
         StringBuilder result = new StringBuilder("{\n");
         Object status = null;
         for (var map : comparingResult) {
@@ -24,6 +22,5 @@ public class StylishFormatter {
         }
         result.append("}");
         return result.toString();
-
     }
 }
