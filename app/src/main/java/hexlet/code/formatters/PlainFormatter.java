@@ -5,50 +5,52 @@ import java.util.Map;
 
 public class PlainFormatter {
     public static String format(List<Map<String, Object>> comparingResult) {
-
         StringBuilder result = new StringBuilder();
-        Object status = "";
-
         for (var map : comparingResult) {
-            status = map.get("STATUS");
-
+            Object status = map.get("STATUS");
             if (status.equals("SAME")) {
-                result.append("");
+                continue;
+            }
+
+            if (status.equals("DELETED")) {
+                appendDeletedProperty(result, map);
             } else {
-                result.append("Property '" + map.get("FIELD") + "' was ");
-
-                if (status.equals("DELETED")) {
-                    result.append("removed\n");
-                } else {
-
-                    Object oldValue = map.get("OLD_VALUE");
-                    Object newValue = map.get("NEW_VALUE");
-
-                    // проверка на вложенные структуры и строки
-                    if (oldValue != null && (oldValue.getClass().isArray() || oldValue instanceof Map<?, ?>
-                            || oldValue instanceof List<?>)) {
-                        oldValue = "[complex value]";
-                    } else if (oldValue instanceof String && !oldValue.equals("null")) {
-                        oldValue = "'" + oldValue + "'";
-                    }
-
-                    if (newValue != null && (newValue.getClass().isArray() || newValue instanceof Map<?, ?>
-                            || newValue instanceof List<?>)) {
-                        newValue = "[complex value]";
-                    } else if (newValue instanceof String && !newValue.equals("null")) {
-                        newValue = "'" + newValue + "'";
-                    }
-
-                    if (status.equals("CHANGED")) {
-                        result.append("updated. From " + oldValue + " to " + newValue + "\n");
-                    } else {
-                        result.append("added with value: " + newValue + "\n");
-                    }
-                }
+                appendModifiedOrAddedProperty(result, map);
             }
         }
-        result.deleteCharAt(result.length() - 1);
+        if (!result.isEmpty()) {
+            result.deleteCharAt(result.length() - 1);
+        }
         return result.toString();
+    }
 
+    private static void appendDeletedProperty(StringBuilder result, Map<String, Object> map) {
+        result.append("Property '" + map.get("FIELD") + "' was removed\n");
+    }
+
+    private static void appendModifiedOrAddedProperty(StringBuilder result, Map<String, Object> map) {
+        result.append("Property '" + map.get("FIELD") + "' was");
+        Object oldValue = map.get("OLD_VALUE");
+        Object newValue = map.get("NEW_VALUE");
+
+        oldValue = formatValue(oldValue);
+        newValue = formatValue(newValue);
+
+        if (map.get("STATUS").equals("CHANGED")) {
+            result.append(" updated. From " + oldValue + " to " + newValue + "\n");
+        } else {
+            result.append(" added with value: " + newValue + "\n");
+        }
+    }
+
+    private static String formatValue(Object value) {
+        if (value != null && (value.getClass().isArray() || value instanceof Map<?, ?>
+                || value instanceof List<?>)) {
+            return "[complex value]";
+        } else if (value instanceof String && !value.equals("null")) {
+            return "'" + value + "'";
+        } else {
+            return String.valueOf(value);
+        }
     }
 }
