@@ -13,10 +13,10 @@ public class Differ {
         String fileFormat1 = DataUtils.getFileType(filepath1);
         String fileFormat2 = DataUtils.getFileType(filepath2);
 
-        Map<String, Object> file1 = Parser.parse(content1, fileFormat1);
-        Map<String, Object> file2 = Parser.parse(content2, fileFormat2);
+        Map<String, Object> fileData1 = Parser.parse(content1, fileFormat1);
+        Map<String, Object> fileData2 = Parser.parse(content2, fileFormat2);
 
-        List<Map<String, Object>> comparingResult = Comparison.compare(file1, file2);
+        List<Map<String, Object>> comparingResult = Comparison.compare(fileData1, fileData2);
 
         return Formatter.format(comparingResult, format);
     }

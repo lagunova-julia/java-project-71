@@ -7,15 +7,16 @@ public class PlainFormatter {
     public static String format(List<Map<String, Object>> comparingResult) {
         StringBuilder result = new StringBuilder();
         for (var map : comparingResult) {
-            Object status = map.get("STATUS");
-            if (status.equals("SAME")) {
-                continue;
-            }
-
-            if (status.equals("DELETED")) {
-                appendDeletedProperty(result, map);
-            } else {
-                appendModifiedOrAddedProperty(result, map);
+            String status = (String) map.get("STATUS");
+            switch (status) {
+                case "SAME":
+                    continue;
+                case "DELETED":
+                    appendDeletedProperty(result, map);
+                    break;
+                default:
+                    appendModifiedOrAddedProperty(result, map);
+                    break;
             }
         }
         if (!result.isEmpty()) {
