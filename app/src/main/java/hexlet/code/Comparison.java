@@ -20,7 +20,7 @@ public class Comparison {
         return comparingResult;
     }
 
-    private static Map<String, Object> compareFields (String key, Map<String, Object> fileData1,
+    private static Map<String, Object> compareFields(String key, Map<String, Object> fileData1,
                                                       Map<String, Object> fileData2) {
         Map<String, Object> map = new HashMap<>();
         map.put("FIELD", key);
