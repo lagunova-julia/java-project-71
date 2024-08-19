@@ -5,6 +5,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class DataUtils {
+    public static final String STATUS = "STATUS";
+    public static final String FIELD = "FIELD";
+    public static final String SAME = "SAME";
+    public static final String CHANGED = "CHANGED";
+    public static final String ADDED = "ADDED";
+    public static final String DELETED = "DELETED";
+    public static final String OLD_VALUE = "OLD_VALUE";
+    public static final String NEW_VALUE = "NEW_VALUE";
     private static Path getFixedPath(String fileName) {
         return Path.of(new File(fileName).getAbsolutePath());
     }

@@ -1,5 +1,7 @@
 package hexlet.code.formatters;
 
+import hexlet.code.DataUtils;
+
 import java.util.List;
 import java.util.Map;
 
@@ -8,16 +10,21 @@ public class StylishFormatter {
         StringBuilder result = new StringBuilder("{\n");
         Object status = null;
         for (var map : comparingResult) {
-            status = map.get("STATUS");
-            if (status.equals("SAME")) {
-                result.append("    " + map.get("FIELD") + ": " + map.get("OLD_VALUE").toString() + "\n");
-            } else if (status.equals("CHANGED")) {
-                result.append("  - " + map.get("FIELD") + ": " + map.get("OLD_VALUE").toString() + "\n");
-                result.append("  + " + map.get("FIELD") + ": " + map.get("NEW_VALUE").toString() + "\n");
-            } else if (status.equals("DELETED")) {
-                result.append("  - " + map.get("FIELD") + ": " + map.get("OLD_VALUE").toString() + "\n");
+            status = map.get(DataUtils.STATUS);
+            if (status.equals(DataUtils.SAME)) {
+                result.append("    " + map.get(DataUtils.FIELD) + ": " + map.get(DataUtils.OLD_VALUE).toString()
+                        + "\n");
+            } else if (status.equals(DataUtils.CHANGED)) {
+                result.append("  - " + map.get(DataUtils.FIELD) + ": " + map.get(DataUtils.OLD_VALUE).toString()
+                        + "\n");
+                result.append("  + " + map.get(DataUtils.FIELD) + ": " + map.get(DataUtils.NEW_VALUE).toString()
+                        + "\n");
+            } else if (status.equals(DataUtils.DELETED)) {
+                result.append("  - " + map.get(DataUtils.FIELD) + ": " + map.get(DataUtils.OLD_VALUE).toString()
+                        + "\n");
             } else {
-                result.append("  + " + map.get("FIELD") + ": " + map.get("NEW_VALUE").toString() + "\n");
+                result.append("  + " + map.get(DataUtils.FIELD) + ": " + map.get(DataUtils.NEW_VALUE).toString()
+                        + "\n");
             }
         }
         result.append("}");
