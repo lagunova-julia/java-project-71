@@ -1,23 +1,23 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class DifferTest {
-    private String filePathJson1 = "src/test/resources/file1.json";
-    private String filePathJson2 = "src/test/resources/file2.json";
-    private String filePathYml1 = "src/test/resources/file1.yml";
-    private String filePathYml2 = "src/test/resources/file2.yml";
     private String expectedStylishPath = "src/test/resources/expected/stylish.txt";
     private String expectedPlainPath = "src/test/resources/expected/plain.txt";
     private String expectedJsonPath = "src/test/resources/expected/json.txt";
     private String result;
     private String format;
+    private String expectedOutput;
 
     @BeforeEach
     void setUp() {
@@ -26,86 +26,82 @@ class DifferTest {
     @Test
     public void testInvalidJsonParsing() {
         String invalidJsonData = "invalid json data";
-        try {
+        assertThrows(JsonParseException.class, () -> {
             Parser.parse(invalidJsonData, "json");
-            fail("Trying to parse invalid json file");
-        } catch (Exception e) {
-            assertTrue(true);
-        }
+        }, "JsonParseException was expected");
     }
 
     @Test
     public void testInvalidYamlParsing() {
         String invalidYamlData = "invalid yaml data";
-        try {
+        assertThrows(JsonMappingException.class, () -> {
             Parser.parse(invalidYamlData, "yaml");
-            fail("Trying to parse invalid yaml file");
-        } catch (Exception e) {
-            assertTrue(true);
-        }
+        }, "JsonMappingException was expected");
     }
 
     @Test
     public void testInvalidYmlParsing() {
         String invalidYmlData = "invalid yml data";
-        try {
+        assertThrows(JsonMappingException.class, () -> {
             Parser.parse(invalidYmlData, "yml");
-            fail("Trying to parse invalid yml file");
-        } catch (Exception e) {
-            assertTrue(true);
-        }
+        }, "JsonMappingException was expected");
     }
 
-    @Test
-    void testDefaultOutput() throws Exception {
-        String expectedStylish = DataUtils.readFixedPath(expectedStylishPath);
-        result = Differ.generate(filePathJson1, filePathJson2);
-        assertEquals(expectedStylish, result);
-
-        result = Differ.generate(filePathYml1, filePathYml2);
-        assertEquals(expectedStylish, result);
+    @ParameterizedTest
+    @CsvSource({
+            "src/test/resources/file1.json, src/test/resources/file2.json",
+            "src/test/resources/file1.yml, src/test/resources/file2.yml"
+    })
+    void testDefaultOutput(String filePath1, String filePath2) throws Exception {
+        expectedOutput = DataUtils.readFixedPath(expectedStylishPath);
+        result = Differ.generate(filePath1, filePath2);
+        assertEquals(expectedOutput, result);
     }
 
-    @Test
-    void testStylishOutput() throws Exception {
+    @ParameterizedTest
+    @CsvSource({
+            "src/test/resources/file1.json, src/test/resources/file2.json",
+            "src/test/resources/file1.yml, src/test/resources/file2.yml"
+    })
+    void testStylishOutput(String filePath1, String filePath2) throws Exception {
         format = "stylish";
-        String expectedStylish = DataUtils.readFixedPath(expectedStylishPath);
-        result = Differ.generate(filePathJson1, filePathJson2, format);
-        assertEquals(expectedStylish, result);
-
-        result = Differ.generate(filePathYml1, filePathYml2, format);
-        assertEquals(expectedStylish, result);
+        expectedOutput = DataUtils.readFixedPath(expectedStylishPath);
+        result = Differ.generate(filePath1, filePath2, format);
+        assertEquals(expectedOutput, result);
     }
 
-    @Test
-    void testPlainOutput() throws Exception {
+    @ParameterizedTest
+    @CsvSource({
+            "src/test/resources/file1.json, src/test/resources/file2.json",
+            "src/test/resources/file1.yml, src/test/resources/file2.yml"
+    })
+    void testPlainOutput(String filePath1, String filePath2) throws Exception {
         format = "plain";
-        String expectedPlain = DataUtils.readFixedPath(expectedPlainPath);
-        result = Differ.generate(filePathJson1, filePathJson2, format);
-        assertEquals(expectedPlain, result);
-
-        result = Differ.generate(filePathYml1, filePathYml2, format);
-        assertEquals(expectedPlain, result);
+        expectedOutput = DataUtils.readFixedPath(expectedPlainPath);
+        result = Differ.generate(filePath1, filePath2, format);
+        assertEquals(expectedOutput, result);
     }
 
-    @Test
-    void testJsonOutput() throws Exception {
+    @ParameterizedTest
+    @CsvSource({
+            "src/test/resources/file1.json, src/test/resources/file2.json",
+            "src/test/resources/file1.yml, src/test/resources/file2.yml"
+    })
+    void testJsonOutput(String filePath1, String filePath2) throws Exception {
         format = "json";
-        String expectedJson = DataUtils.readFixedPath(expectedJsonPath);
-        result = Differ.generate(filePathJson1, filePathJson2, format);
-        assertEquals(expectedJson, result);
-
-        result = Differ.generate(filePathYml1, filePathYml2, format);
-        assertEquals(expectedJson, result);
+        expectedOutput = DataUtils.readFixedPath(expectedJsonPath);
+        result = Differ.generate(filePath1, filePath2, format);
+        assertEquals(expectedOutput, result);
     }
 
-    @Test
-    void testIncorrectResult() throws Exception {
-        String expectedPlain = DataUtils.readFixedPath(expectedPlainPath);
-        result = Differ.generate(filePathJson1, filePathJson2);
-        assertNotEquals(expectedPlain, result);
-
-        result = Differ.generate(filePathYml1, filePathYml2);
-        assertNotEquals(expectedPlain, result);
+    @ParameterizedTest
+    @CsvSource({
+            "src/test/resources/file1.json, src/test/resources/file2.json",
+            "src/test/resources/file1.yml, src/test/resources/file2.yml"
+    })
+    void testIncorrectResult(String filePath1, String filePath2) throws Exception {
+        expectedOutput = DataUtils.readFixedPath(expectedPlainPath);
+        result = Differ.generate(filePath1, filePath2);
+        assertNotEquals(expectedOutput, result);
     }
 }
