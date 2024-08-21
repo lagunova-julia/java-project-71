@@ -12,15 +12,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class DifferTest {
-    private String expectedStylishPath = "src/test/resources/expected/stylish.txt";
-    private String expectedPlainPath = "src/test/resources/expected/plain.txt";
-    private String expectedJsonPath = "src/test/resources/expected/json.txt";
+    private String expectedStylishPath;
+    private String expectedPlainPath;
+    private String expectedJsonPath;
     private String result;
     private String format;
     private String expectedOutput;
 
     @BeforeEach
-    void setUp() {
+    void initEach() {
+        expectedStylishPath = "src/test/resources/expected/stylish.txt";
+        expectedPlainPath = "src/test/resources/expected/plain.txt";
+        expectedJsonPath = "src/test/resources/expected/json.txt";
     }
 
     @Test
