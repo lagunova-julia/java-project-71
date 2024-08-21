@@ -49,8 +49,8 @@ class DifferTest {
 
     @ParameterizedTest
     @CsvSource({
-       "src/test/resources/file1.json, src/test/resources/file2.json",
-       "src/test/resources/file1.yml, src/test/resources/file2.yml"
+        "src/test/resources/file1.json, src/test/resources/file2.json",
+        "src/test/resources/file1.yml, src/test/resources/file2.yml"
     })
     void testDefaultOutput(String filePath1, String filePath2) throws Exception {
         expectedOutput = DataUtils.readFixedPath(expectedStylishPath);
@@ -60,8 +60,8 @@ class DifferTest {
 
     @ParameterizedTest
     @CsvSource({
-       "src/test/resources/file1.json, src/test/resources/file2.json",
-       "src/test/resources/file1.yml, src/test/resources/file2.yml"
+        "src/test/resources/file1.json, src/test/resources/file2.json",
+        "src/test/resources/file1.yml, src/test/resources/file2.yml"
     })
     void testStylishOutput(String filePath1, String filePath2) throws Exception {
         format = "stylish";
@@ -72,8 +72,8 @@ class DifferTest {
 
     @ParameterizedTest
     @CsvSource({
-       "src/test/resources/file1.json, src/test/resources/file2.json",
-       "src/test/resources/file1.yml, src/test/resources/file2.yml"
+        "src/test/resources/file1.json, src/test/resources/file2.json",
+        "src/test/resources/file1.yml, src/test/resources/file2.yml"
     })
     void testPlainOutput(String filePath1, String filePath2) throws Exception {
         format = "plain";
@@ -84,8 +84,8 @@ class DifferTest {
 
     @ParameterizedTest
     @CsvSource({
-       "src/test/resources/file1.json, src/test/resources/file2.json",
-       "src/test/resources/file1.yml, src/test/resources/file2.yml"
+        "src/test/resources/file1.json, src/test/resources/file2.json",
+        "src/test/resources/file1.yml, src/test/resources/file2.yml"
     })
     void testJsonOutput(String filePath1, String filePath2) throws Exception {
         format = "json";
@@ -96,8 +96,8 @@ class DifferTest {
 
     @ParameterizedTest
     @CsvSource({
-       "src/test/resources/file1.json, src/test/resources/file2.json",
-       "src/test/resources/file1.yml, src/test/resources/file2.yml"
+        "src/test/resources/file1.json, src/test/resources/file2.json",
+        "src/test/resources/file1.yml, src/test/resources/file2.yml"
     })
     void testIncorrectResult(String filePath1, String filePath2) throws Exception {
         expectedOutput = DataUtils.readFixedPath(expectedPlainPath);
