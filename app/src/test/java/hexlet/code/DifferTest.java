@@ -12,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class DifferTest {
-    private final String INVALID_JSON_DATA = "invalid json data";
-    private final String INVALID_YAML_DATA = "invalid yaml data";
-    private final String INVALID_YML_DATA = "invalid yml data";
+    private final String invalidJsonData = "invalid json data";
+    private final String invalidYamlData = "invalid yaml data";
+    private final String invalidYmlData = "invalid yml data";
     private String expectedStylishPath;
     private String expectedPlainPath;
     private String expectedJsonPath;
@@ -32,21 +32,21 @@ class DifferTest {
     @Test
     public void testInvalidJsonParsing() {
         assertThrows(JsonParseException.class, () -> {
-            Parser.parse(INVALID_JSON_DATA, "json");
+            Parser.parse(invalidJsonData, "json");
         }, "JsonParseException was expected");
     }
 
     @Test
     public void testInvalidYamlParsing() {
         assertThrows(JsonMappingException.class, () -> {
-            Parser.parse(INVALID_YAML_DATA, "yaml");
+            Parser.parse(invalidYamlData, "yaml");
         }, "JsonMappingException was expected");
     }
 
     @Test
     public void testInvalidYmlParsing() {
         assertThrows(JsonMappingException.class, () -> {
-            Parser.parse(INVALID_YML_DATA, "yml");
+            Parser.parse(invalidYmlData, "yml");
         }, "JsonMappingException was expected");
     }
 
